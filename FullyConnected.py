@@ -148,7 +148,9 @@ tmp_bers = np.zeros((1,test_iter))
 tmp_times = np.zeros((1,test_iter))
 times = np.zeros((1,1))
 testHitCount = 0
-snr_list = np.linspace(low_snr_test,high_snr_test,num_snr)
+
+snr_list_db = np.linspace(low_snr_db_test,high_snr_db_test,num_snr)
+snr_list = 10.0**(snr_list_db/10.0)
 for i_snr in range (num_snr):
     Cur_SNR = snr_list[i_snr]
     print 'cur snr'
