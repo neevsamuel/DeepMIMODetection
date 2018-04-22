@@ -74,9 +74,8 @@ def generate_data_iid_test(B,K,N,snr_low,snr_high):
 	SNR = np.random.uniform(low=snr_low,high=snr_high)
         H=H_[i,:,:]
         tmp_snr=(H.T.dot(H)).trace()/K
-        H=H/np.sqrt(tmp_snr)*np.sqrt(SNR)
         H_[i,:,:]=H
-        y_[i,:]=(H.dot(x_[i,:])+w[i,:])
+        y_[i,:]=(H.dot(x_[i,:])+w[i,:]*np.sqrt(tmp_snr)/np.sqrt(SNR))
         Hy_[i,:]=H.T.dot(y_[i,:])
         HH_[i,:,:]=H.T.dot( H_[i,:,:])
 	SNR_[i] = SNR
@@ -95,9 +94,8 @@ def generate_data_train(B,K,N,snr_low,snr_high):
 	SNR = np.random.uniform(low=snr_low,high=snr_high)
         H=H_[i,:,:]
         tmp_snr=(H.T.dot(H)).trace()/K
-        H=H/np.sqrt(tmp_snr)*np.sqrt(SNR)
         H_[i,:,:]=H
-        y_[i,:]=(H.dot(x_[i,:])+w[i,:])
+        y_[i,:]=(H.dot(x_[i,:])+w[i,:]*np.sqrt(tmp_snr)/np.sqrt(SNR))
         Hy_[i,:]=H.T.dot(y_[i,:])
         HH_[i,:,:]=H.T.dot( H_[i,:,:])
 	SNR_[i] = SNR
